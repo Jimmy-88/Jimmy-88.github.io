@@ -1,0 +1,797 @@
+<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Sometype+Mono">
+<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Oswald">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Úvod</title>
+    </head>
+
+    <body>
+        <div class="container" id="all">
+            <div class="navbar">
+                <div class="navbar-left">
+                    <div class="navbar-logo">
+                        Mensport
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="navbar-links">
+                        <a href="kontakt.html">Kontakt</a>
+                        <a href="faq.html">F.A.Q</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ctverce-center">
+                <div class="infoctverce">
+                    <div class="nadpis-global">
+                        Naše zásady
+                    </div>
+                    <div class="ctverec">
+                        <div class="ctverec-nadpis">
+                            Víkedy
+                        </div>
+                        Zastáváme názor, že víkendy jsou den jako každý jiný, proto vám poskytujeme naše služby 7 dní v týdnu.
+                    </div>
+                    <div class="ctverec">
+                        <div class="ctverec-nadpis">
+                            Svátky
+                        </div>
+                        Věříme, že i ve svátky je potřeba vytvářet hodnoty, takže i v tyto dny se na nás můžete spolehnout.
+                    </div>
+                    <div class="ctverec">
+                        <div class="ctverec-nadpis">
+                            Noci
+                        </div>
+                        Někdo je zkrátka noční sova. My také, proto se na nás můžete obrátit i mimo klasickou pracovní dobu.
+                    </div>
+                </div>
+            </div>
+            <div class="vozidla">
+                <div class="vozidla-header">
+                    Aktuální vozový park
+                    <div class="vehs">
+                        <div class="veh-box">
+                            <div class="box-up">
+                                <div class="box-header">
+                                    Dacia Logan
+                                </div>
+                                <div class="box-status">
+                                    ✔️
+                                </div>
+                                <div class="box-info" id="infobutton_logan">
+                                
+                                </div>
+                            </div>
+                            <div class="box-text">
+                                Dacia Logan je malý vůz zaměřený na podnikání s ložným prostorem 2 500 litrů a užitečnou hmotností 800 kg. Je založen na platformě Dacia B0, která se používá i pro další modely Renault a Nissan. Logan má o 50 % méně dílů než špičkový vůz Renault. Z hlediska designu má Dacia Logan MCV konzervativní a poněkud zastaralý exteriér s relativně malými koly. Často je označován jako Sandero s koridorem připevněným na zadní části.
+                            </div>
+                            <div class="box-img">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kalk-napis">
+                Kalkulačka cen
+            </div>
+            <div class="kalkulacka">
+                <div class="kalkulacka-box">
+                    <div class="kalkulacka-header">
+                        <div class="kalkulacka-obsah">
+                            <div class="ujeta-vzdalenost">
+                                Ujetá vzálenost
+                            </div>
+                            <input type="number" id="vzdalenost" min="1" value="0">
+                            <div class="checkboxes-boxes">
+                                <div class="vikend">
+                                    Víkend
+                                </div>
+                                <div class="checkbox-style">
+                                    <input type="checkbox" id="vikend">
+                                </div>
+                                <div class="svatek">
+                                    Svátek
+                                </div>
+                                <div class="checkbox-style">
+                                    <input type="checkbox" id="svatek">
+                                </div>
+                                <hr class="solid">
+                                <div class="vysledek">
+                                    Výsledná cena
+                                </div>
+                                <div class="vysledek-cislo" id="vysledek">
+                                    ⬇️
+                                </div>
+                                <div class="spocitat-button">
+                                    <div class="spocitat-box" id="spocitat">
+                                        Spočítat
+                                    </div>
+                                </div>
+                                <div class="doplnujici-text" id="support-text">
+                                    (Částka je pouze orientační)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Additional information about Dacia Logan goes here.</p>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+
+<script>
+    const spocitat_button = document.getElementById("spocitat");
+    const vysledek_text = document.getElementById("vysledek");
+    const support_text = document.getElementById("support-text");
+    const info_logan = document.getElementById("infobutton_logan");
+    spocitat_button.addEventListener("click", spocitat);
+
+    function spocitat(){
+        console.log("Pressed")
+        var vzdalenost = document.getElementById("vzdalenost");
+        //var hodiny = document.getElementById("hodiny");
+        var vikend = document.getElementById("vikend");
+        var svatek = document.getElementById("svatek");
+        var mzda = 130
+        console.log("Vzdalenost: "+vzdalenost.value)
+        //console.log("Hodiny: "+hodiny.value)
+        /*if(hodiny.value<=0 || hodiny.value==""){
+            console.log('Hodiny not specified')
+            spocitat_button.className = "spocitat-box-error";
+            vysledek_text.innerHTML = "❌";
+            return
+        }*/
+        if(vzdalenost.value<=0 || vzdalenost.value==""){
+            console.log('Vzdalenost not specified')
+            spocitat_button.className = "spocitat-box-error";
+            vysledek_text.innerHTML = "❌";
+            support_text.innerHTML = "(Špatně zadaná vzdálenost)";
+            support_text.style.color = "rgb(177, 25, 25)";
+            return
+        }
+        spocitat_button.className = "spocitat-box";
+        if(vikend.checked){
+            console.log('Vikend is checked')
+            mzda = mzda + 30
+        }
+        if(svatek.checked){
+            console.log('Svatek is checked')
+            mzda = mzda + 30
+        }
+        var hodiny = Math.round(vzdalenost.value/80);
+        console.log("Hodiny: "+hodiny)
+        var vysledek = (mzda*hodiny) + (vzdalenost.value * 4)*2
+        console.log("Vysledna castka: "+vysledek)
+        vysledek_text.innerHTML = vysledek + " Kč"
+        support_text.innerHTML = "(Částka je pouze orientační)";
+        support_text.style.color = "white";
+    }
+
+    info_logan.onclick = function(){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
+
+</script>
+
+<style>
+
+    @keyframes tilt-shaking {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(2deg); }
+        50% { transform: rotate(0eg); }
+        75% { transform: rotate(-2deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    *{
+        font-family: Oswald;
+    }
+
+    .doplnujici-text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    .vysledek-cislo{
+        /*text-decoration: underline;*/
+        transition: all 0.3s ease;
+    }
+
+    .spocitat-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+        border-style: solid;
+        border-radius: 20px;
+        border-width: 1px;
+        box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.459);
+        transition: all 0.3s ease;
+    }
+
+    .spocitat-box:hover{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+
+    .spocitat-box-error{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+        border-style: solid;
+        border-radius: 20px;
+        border-width: 1px;
+        box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.459);
+        transition: all 0.3s ease;
+    }
+
+    .spocitat-box-error:hover{
+        background-color: rgb(177, 25, 25);
+        animation: tilt-shaking 0.15s infinite;
+        color: black;
+    }
+
+    .checkbox-style{
+        margin-top: 10px;
+        scale: 200%;
+    }
+
+    .kalkulacka-obsah input{
+        margin-bottom: 10px;
+        border-radius: 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .kalk-napis{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+    .kalkulacka{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .kalkulacka-header{
+        text-align: center;
+        color: white;
+        font-size: 40px;
+    }
+
+    .kalkulacka-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.459);
+        /*background-color: pink;*/
+        background-color: rgb(22, 22, 22);
+        width: 50vh;
+        padding-bottom: 40px;
+    }
+
+    .veh-box{
+        background-color: turquoise;
+        margin-top: 20px;
+        background-color: rgb(22, 22, 22);
+        box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.459);
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+        max-width: 50vh;
+        transition: all 0.3s ease;
+    }
+
+    .veh-box:hover{
+        scale: 110%;
+    }
+
+    .veh-box .box-up{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .veh-box .box-header{
+        text-align: center;
+        font-size: 40px;
+        padding-bottom: 10px;
+    }
+
+    .veh-box .box-status{
+        position: absolute;
+        margin-left: 40vh;
+        margin-bottom: 1vh;
+    }
+
+    .veh-box .box-info {
+        position: absolute;
+        margin-right: 38vh;
+        background-image: url("info.png");
+        background-size: 100%;
+        aspect-ratio: 1/1;
+        width: 40px;
+        cursor:pointer;
+    }
+
+
+    .veh-box .box-text{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .veh-box .box-img{
+       background-image: url("logan.jpg");
+       background-size: 100%;
+       width: 100%;
+       aspect-ratio: 800/600;
+       margin-top: 10px;
+    }
+
+    .vozidla{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 200px;
+    }
+
+    .vozidla .vozidla-header{
+        color: white;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .ctverce-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .infoctverce{
+        margin-top: 150px;
+        color: white;
+        text-align: center;
+    }
+
+    .nadpis-global{
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .ctverec{
+        border-style: solid;
+        border-color: white;
+        border-width: 1px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.459);
+        /*background-color: pink;*/
+        background-color: rgb(22, 22, 22);
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 50px;
+        max-width: 50vh;
+        transition: all 0.3s ease;
+        font-size: 20px;
+        min-height: 15vh;
+    }
+
+    .ctverec:hover{
+        scale: 110%;
+    }
+
+    .ctverec-nadpis{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        /*text-decoration: underline;*/
+    }
+
+    .ctverec-text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(58, 58, 58);
+        font-size: 40px;
+        z-index: 1000;
+        color: white;
+    }
+
+    .navbar-left{
+        margin-left: 20px;
+        /*background-color: orange;*/
+    }
+
+    /*
+    .navbar-links{
+        background-color: green;
+    }
+    */
+
+    .navbar-links a{
+        margin-left: 40px;
+        margin-right: 40px;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+    .navbar-links a:hover{
+        color: yellow;
+    }
+
+    .navbar-logo{
+        transition: all 0.3s ease;
+    }
+
+    .navbar-logo:hover{
+        scale: 120%;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    body{
+        background-color: rgb(44, 44, 44);
+        min-height: 95vh;
+        margin: 0; /* Remove default body margin */
+        padding: 0; /* Remove default body padding */
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .dodak{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dodak-img{
+       background-image: url("clipboard.png");
+       background-size: 100%;
+       height: 932px;
+       aspect-ratio: 9/13.7;
+       
+    }
+
+    .dodak-adresa{
+        color: black;
+        z-index: 1;
+        margin-top: 400px;
+        margin-left: 45px;
+        font-size: 25px;
+        line-height: 50px;
+    }
+
+    .header-center{
+        justify-content: center;
+        align-items: center;
+        /*background-color: aqua;*/
+        text-align: center;
+        margin-top: 220px;
+    }
+
+    .dodak-header{
+        color: black;
+        font-size: 35px;
+        font-size: 'Roboto';
+        font-style: normal;
+    }
+
+    .dodak-underheader{
+        color: black;
+        font-size: 20px;
+        padding-top: 10px;
+    }
+
+    .dodak-text{
+        color: black;
+        z-index: 1;
+        margin-top: 50px;
+        margin-left: 45px;
+        font-size: 25px;
+        line-height: 50px;
+    }
+
+    .fotka-text{
+        padding-bottom: 30px;
+    }
+
+    .dodak-foto-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dodak-fotka{
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+        background-image: url("https://media.discordapp.net/attachments/1171518823996862595/1175567267157790760/image.png?ex=656bb355&is=65593e55&hm=ddcf52abd90059a99b98a7e280b6a4d342c6fb161a5ebfdc6d334745832797a1&=&width=1203&height=676");
+        background-size: 100%;
+        aspect-ratio: 16/9;
+        width: 75%;
+    }
+
+    .right-side{
+        width: 100%;
+        margin-left: 5px;
+        height: 100%;
+        /*background-color: #00000041;*/
+        background-image: linear-gradient(to right top, #322f31, #363537, #3a3a3d, #3f4042, #444647, #434646, #434546, #424545, #3b3e3e, #343737, #2d3131, #262a2a);
+        border-radius: 40px 40px 40px 40px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        
+    }
+
+    .glass-left a{
+        position: relative;
+        display: flex;
+        font-size: 25px;
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+        top: 24vh;
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0);
+        box-shadow: inset 1px 5px 15px rgba(0, 0, 0, 0.5);
+        transition: all 1.5s ease;
+    }
+
+    .glass-left a:hover{
+        background-color: #00000041;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        border-color: red;
+    }
+
+    .logo-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .glass-right .logo{
+        font-size: 5vh;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        
+        transition: all 1.0s ease;
+    }
+
+    .glass-right .logo:hover{
+        scale: 110%;
+    }
+
+    .rows a{
+        position: relative;
+        display: flex;
+        top: 30px;
+        margin-top: 10px;
+        margin-left: 50px;
+        width: 80%;
+        height: 60px;
+        padding-left: 20px;
+        align-items: center;
+        border: 3px solid rgba(0, 0, 0, 0.562);
+        border-radius: 20px 20px;
+        font-size: 30px;
+        transition: all 0.8s ease;
+    }
+
+    .rows a:hover{
+        box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.5);
+        background-color: rgb(202, 190, 16);
+        border-color:rgb(0, 0, 0);
+        color: black;
+    }
+
+    .zustatek{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+        
+    }
+
+    .zustatek .number{
+        font-size: 100px;
+        transition: all 0.8s ease;
+    }
+
+    .zustatek .number:hover{
+        scale: 200% 100%;
+    }
+
+    .vybrat-center{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding-top: 40px;
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .vybratbutton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-style: solid;
+        border-radius: 20px;
+        border-color: rgba(0, 0, 0, 0);
+        margin-top: 40px;
+        width: 20%;
+        padding: 20px;
+        background-image: linear-gradient(to right top, #313939, #323939, #333939, #343939, #353939, #333737, #323535, #303333, #2c2f2f, #282b2b, #242727, #202323);
+        transition: all 0.8s ease;
+    }
+
+    .vybratbutton:hover{
+        border-color: red;
+        box-shadow: 2px 5px rgba(0, 0, 0, 0.452);
+        scale: 105%;
+    }
+
+    .vybratbutton .vybrat-text{
+        font-size: 40px;
+    }
+
+    .vybrat-input{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0);
+        color: white;
+        border-style: solid;
+        margin-top: 40px;
+        margin-left: 15px;
+        padding: 20px;
+        width: 80%;
+        border-radius: 20px;
+        border-color: white;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .vybrat-input-text{
+        font-size: 40px;
+    }
+
+    .field-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vybrat-input-field{
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 40px;
+        color: white;
+        border: none;
+    }
+
+    
+
+    @media screen and (max-width: 1075px){
+        .content{
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 720px){
+        .logo{
+            font-size: 22px;
+
+        }
+        li.nav-link{
+            font-size: 13px;
+        }
+        .main h2{
+            font-size: 28px;
+        }
+        .main p{
+            font-size: 15px;
+        }
+        button{
+            font-size: 13px;
+        }
+        .image-wrapper img{
+            max-width: 400px;
+        }
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    /* Close Button */
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    /* Close Button Hover Effect */
+    .close:hover {
+        color: red;
+    }
+
+</style>
