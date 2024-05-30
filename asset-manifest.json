@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8329be70.css",
+    "main.js": "/static/js/main.570a3900.js",
+    "static/js/453.acca0757.chunk.js": "/static/js/453.acca0757.chunk.js",
+    "static/media/PoetsenOne-Regular.ttf": "/static/media/PoetsenOne-Regular.22ae511e03fc2ed8d264.ttf",
+    "static/media/LuckiestGuy-Regular.ttf": "/static/media/LuckiestGuy-Regular.fd5a8f5e455b026973fc.ttf",
+    "index.html": "/index.html",
+    "main.8329be70.css.map": "/static/css/main.8329be70.css.map",
+    "main.570a3900.js.map": "/static/js/main.570a3900.js.map",
+    "453.acca0757.chunk.js.map": "/static/js/453.acca0757.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8329be70.css",
+    "static/js/main.570a3900.js"
+  ]
+}
